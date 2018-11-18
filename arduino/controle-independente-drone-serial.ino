@@ -6,7 +6,7 @@ Servo escAmarelo;
 Servo escVermelho;
 
 int speedVerde, speedAmarelo, speedBranco, speedVermelho;
-int opcao;
+int leitura, vel, motor;
 bool checkAmarelo = false;
 bool checkVermelho = false;
 bool checkBranco = false;
@@ -26,17 +26,41 @@ void setup(){
 }
 
 void loop() {
-  opcao = Serial.read();
-  if(opcao != -1)
-    getCodigo();
+  leitura = Serial.read();
+  if(leitura!= -1)
+    Serial.print(leitura);
+    
+  if(leitura > 47 && leitura < 58 ){
+    vel = map(leitura, 48, 57, 0, 9);
+    vel = map(vel, 0, 9, 1000, 2000);
+  }else if(leitura != -1 && leitura != 10){
+    motor = leitura;
+  }
+  if (vel != 0 && leitura != -1){
+    Serial.print("velocidade");
+    Serial.print(vel);
+    Serial.print("motor:");
+    Serial.print(motor);
+
+    Serial.print("map");
+    Serial.print(vel);
+
+    if(vel == 1000)
+      getCodigo(0, motor);
+    else
+      getCodigo(vel, motor);
+    
+    vel = 0;
+    motor = 0;
+  }
 }
 
 //CÓDIGOS
-void getCodigo(){
-  switch(opcao){
+void getCodigo(int vel, int opcaoMotor){
+  switch(opcaoMotor){
     case 97: //a
-    if(!checkAll){
-      setAllSpeed(2000);
+    if(!checkAll && vel != 0){
+      setAllSpeed(vel);
       runAll();
       setAllStatus(true);
     }else{
@@ -46,8 +70,8 @@ void getCodigo(){
     break;
 
     case 98: //c
-    if(!checkVerde){
-      setSpeedVerde(2000);
+    if(!checkVerde && vel != 0){
+      setSpeedVerde(vel);
       runVerde();
       checkVerde = true;
     }else{
@@ -57,8 +81,8 @@ void getCodigo(){
     break;
 
     case 99: //d
-    if(!checkAmarelo){
-      setSpeedAmarelo(2000);
+    if(!checkAmarelo && vel != 0){
+      setSpeedAmarelo(vel);
       runAmarelo();
       checkAmarelo = true;
     }else{
@@ -68,8 +92,8 @@ void getCodigo(){
     break;
 
     case 100: //e
-    if(!checkVermelho){
-      setSpeedVermelho(2000);
+    if(!checkVermelho && vel != 0){
+      setSpeedVermelho(vel);
       runVermelho();
       checkVermelho = true;
     }else{
@@ -79,8 +103,8 @@ void getCodigo(){
     break;
 
     case 101: //f
-    if(!checkBranco){
-      setSpeedBranco(2000);
+    if(!checkBranco && vel != 0){
+      setSpeedBranco(vel);
       runBranco();
       checkBranco = true;
     }else{
