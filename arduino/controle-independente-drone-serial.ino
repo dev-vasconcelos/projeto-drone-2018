@@ -38,10 +38,10 @@ void getCodigo(){
     if(!checkAll){
       setAllSpeed(2000);
       runAll();
-      checkAll = true;
+      setAllStatus(true);
     }else{
       stopAll();
-      checkAll = false;
+      setAllStatus(false);
     }
     break;
 
@@ -167,3 +167,11 @@ void stopVermelho(){
   runVermelho();
 }
 
+
+void setAllStatus(bool status){
+  checkAmarelo = status;
+  checkVerde = status;
+  checkVermelho = status;
+  checkBranco = status;
+  checkAll = status;
+}
