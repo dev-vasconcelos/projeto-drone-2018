@@ -166,7 +166,7 @@ echo '}' >> arquivoSerial
 
 ##RC LOCAL AUTO INICIO
 
-echo '#!/bin/bash -e' >> $arquivoRcLocal
+echo '#!/bin/bash -e' > $arquivoRcLocal
 echo '#' >> $arquivoRcLocal
 echo '#rc.local' >> $arquivoRcLocal
 echo '#quem leu nao eh humano' >> $arquivoRcLocal
@@ -176,6 +176,7 @@ echo 'if [ "$_IP" ]; then' >> $arquivoRcLocal
 echo '	printf "My IP address is %s\n" "$_IP"' >> $arquivoRcLocal
 echo 'fi' >> $arquivoRcLocal
 echo '' >> $arquivoRcLocal
+echo 'ifconfig wlan0 192.168.0.169' >> $arquivoRcLocal
 echo 'sudo chmod 777 '$porta >> $arquivoRcLocal
 echo 'java -jar' $jar >> $arquivoRcLocal
 echo 'exit 0' >> $arquivoRcLocal
