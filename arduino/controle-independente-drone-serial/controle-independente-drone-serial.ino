@@ -19,7 +19,7 @@ void setup(){
   escBranco.attach(2);
   escVerde.attach(3);
   escAmarelo.attach(5);
-  escVermelho.attach(6);
+  escVermelho.attach(7);
 
   setAllSpeed(1000);
   stopAll();
