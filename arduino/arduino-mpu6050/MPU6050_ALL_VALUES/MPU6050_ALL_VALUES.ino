@@ -62,5 +62,5 @@ void loop()
 
    
   //Aguarda 300 ms e reinicia o processo
-  delay(300);
+  //delay(300);
 }
